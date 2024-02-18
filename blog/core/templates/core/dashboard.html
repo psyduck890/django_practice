@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load tailwind_filters %}
+{% block title %} About {% endblock %}
+{% block content %}
+    <h1 class="text-xl">Dashboard</h1>
+    <br>
+    <p>Hi, {{ user }}</p>
+    <p>Your subscription is valid until... </p>
+    <p>Cancel your subscription here</p>
+    <a href="{% url 'core:password_change' %}">Change your password here</a>
+    <p>Change your email here</p>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Generate QR code below:</p>
+        {{form | crispy}}
+        <input type="text" name="data" id="">
+        <button type="submit" class="btn bg-cyan-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Generate!</button>
+    </form>
+    
+    <div class="qr-img">
+        {% if img_name %}
+            <img src="/media/{{img_name}}" alt="qr code">
+        {% endif %}
+    </div>
+
+{% endblock %}
